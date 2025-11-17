@@ -100,3 +100,147 @@ plt.show()
 ```
 
 El gráfico inferior ("Filtro Butterworth de Python") muestra una implementación que utiliza coeficientes estables (generados por herramientas como "scipy.signal"). Ademas de esto se presenta Estabilidad Numérica . El código utiliza coeficientes calculados con alta precisión o, preferiblemente, implementa el filtro como una Cascada de Secciones de Segundo Orden (SOS), que es el método estándar para filtros IIR de alto orden. Esto asegura que todos los polos se mantengan dentro del Círculo Unitario, previniendo la inestabilidad.
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal # Necesario para find_peaks
+
+# =======================================================
+# 1. PARÁMETROS DEL SISTEMA Y FILTRO (Mismos que los provistos)
+# =======================================================
+# Parámetros / archivo
+archivo_csv = "senal_EcG_LAB52minsilencio.csv"  # ¡AJUSTA ESTE NOMBRE!
+columna_ecg = None # None -> usa la última columna
+Fs = 500  # Frecuencia de muestreo en Hz
+T_SEGMENTO_MIN = 2  # Duración de cada segmento en minutos
+
+# Coeficientes (Fs = 500 Hz) - Filtro IIR de 2do Orden estable
+b0 = 0.20217668530533872
+b1 = 0.0
+b2 = -0.20217668530533872
+a1 = -1.593074522250445
+a2 = 0.5956466293893226
+
+
+# =======================================================
+# 2. CARGA Y FILTRADO DE LA SEÑAL (Implementación IIR $N=2$)
+# =======================================================
+try:
+    df = pd.read_csv(archivo_csv, sep=',', decimal=',') # Ajuste para el formato de tu CSV
+    
+    if columna_ecg is None:
+        ecg_col = df.columns[-1]
+    else:
+        ecg_col = columna_ecg
+
+    x = df[ecg_col].astype(float).values
+except Exception as e:
+    print(f"Error al cargar el archivo: {e}. Asegúrate de que el nombre y la columna son correctos.")
+    exit()
+
+# Filtrado (ecuación en diferencias) - ASUME PARÁMETROS INICIALES EN 0
+y_filtrado = np.zeros_like(x, dtype=float)
+x_1 = x_2 = 0.0
+y_1 = y_2 = 0.0
+
+for n, xn in enumerate(x):
+    # y[n] = -a1*y[n-1] - a2*y[n-2] + b0*x[n] + b1*x[n-1] + b2*x[n-2]
+    yn = -a1 * y_1 - a2 * y_2 + b0 * xn + b1 * x_1 + b2 * x_2
+    y_filtrado[n] = yn
+    
+    # actualizar estados (memoria)
+    x_2 = x_1
+    x_1 = xn
+    y_2 = y_1
+    y_1 = yn
+
+
+# =======================================================
+# 3. DIVISIÓN DE LA SEÑAL EN SEGMENTOS DE 2 MINUTOS
+# =======================================================
+N_segmento = T_SEGMENTO_MIN * 60 * Fs  # 2 min * 60 s/min * 500 Hz = 60000 muestras
+
+# Asegurarse de que haya al menos dos segmentos
+if len(y_filtrado) < N_segmento * 2:
+    print("Advertencia: La señal es demasiado corta para dos segmentos de 2 minutos. Procesando lo que hay.")
+    N_segmento = len(y_filtrado) // 2
+
+segmento1 = y_filtrado[0:N_segmento]
+segmento2 = y_filtrado[N_segmento:2*N_segmento]
+print(f"Señal filtrada dividida en 2 segmentos de {N_segmento/Fs:.2f} segundos.")
+
+
+# =======================================================
+# 4. FUNCIÓN PARA IDENTIFICAR PICOS R y CALCULAR R-R
+# =======================================================
+def analizar_segmento(segmento, Fs, segmento_id):
+    # Parámetros para find_peaks:
+    # distance: Mínimo 0.3 segundos entre latidos (150 muestras a 500 Hz)
+    # height: Umbral de 0.5 mV asumido para detectar el pico R, basado en visualizaciones anteriores.
+    
+    peaks, _ = signal.find_peaks(
+        segmento, 
+        height=0.5, 
+        distance=int(0.3 * Fs)
+    )
+    
+    if len(peaks) < 2:
+        print(f"Segmento {segmento_id}: No se detectaron suficientes picos R para calcular R-R.")
+        return []
+
+    # Cálculo de Intervalos R-R (diferencia entre picos, en muestras)
+    rr_muestras = np.diff(peaks)
+    
+    # Obtener una nueva señal con dicha información (RR en milisegundos)
+    rr_ms = (rr_muestras / Fs) * 1000
+    
+    print(f"Segmento {segmento_id}: {len(peaks)} picos R detectados. {len(rr_ms)} intervalos R-R calculados.")
+    
+    return rr_ms
+
+
+# =======================================================
+# 5. EJECUCIÓN DEL ANÁLISIS Y CREACIÓN DE LA SEÑAL R-R
+# =======================================================
+
+rr_ms1 = analizar_segmento(segmento1, Fs, 1)
+rr_ms2 = analizar_segmento(segmento2, Fs, 2)
+
+# Unir los resultados en una sola señal
+rr_ms_total = np.concatenate((rr_ms1, rr_ms2))
+beat_number = np.arange(1, len(rr_ms_total) + 1)
+
+# Crear la nueva señal R-R (DataFrame)
+df_rr = pd.DataFrame({
+    'Beat_Number': beat_number,
+    'RR_Interval_ms': rr_ms_total
+})
+
+# Guardar y mostrar
+out_rr_name = "RR_Interval_Signal_N2_Filtro.csv"
+df_rr.to_csv(out_rr_name, index=False)
+print(f"\nNueva señal de Intervalos R-R guardada en: {out_rr_name}")
+
+
+# =======================================================
+# 6. VISUALIZACIÓN DE LA NUEVA SEÑAL R-R
+# =======================================================
+
+plt.figure(figsize=(12, 6))
+plt.plot(df_rr['Beat_Number'], df_rr['RR_Interval_ms'], marker='o', linestyle='-', color='darkgreen', markersize=3)
+plt.title(f'Señal de Intervalos R-R (Total de {len(rr_ms_total)} latidos)')
+plt.xlabel('Número de Latido (Beat Number)')
+plt.ylabel('Intervalo R-R (ms)')
+plt.grid(True)
+plt.show()
+```
+![IRR ]()
+El proceso se implementó asumiendo que el filtro estaba en estado de reposo al inicio, con todos los parámetros iniciales en cero.
+
+1. Filtrado Estable: Se aplicó el filtro IIR (N=2) con la ecuación en diferencias, asumiendo condiciones iniciales $0$
+2. Segmentación: La señal filtrada se dividió en dos segmentos de 2 minutos cada uno.
+3. Detección R-R: Se identificaron los picos R en cada segmento usando un umbral de altura y distancia.
+4. Cálculo R-R: Se midió la diferencia de tiempo entre picos R consecutivos y se convirtió a milisegundos ($\text{ms}$), generando la señal final de Intervalos R-R.
+   

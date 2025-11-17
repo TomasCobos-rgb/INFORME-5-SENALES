@@ -236,7 +236,7 @@ plt.ylabel('Intervalo R-R (ms)')
 plt.grid(True)
 plt.show()
 ```
-![IRR ]()
+![IRR ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_183340922.png?raw=true)
 El proceso se implementó asumiendo que el filtro estaba en estado de reposo al inicio, con todos los parámetros iniciales en cero.
 
 1. Filtrado Estable: Se aplicó el filtro IIR (N=2) con la ecuación en diferencias, asumiendo condiciones iniciales $0$

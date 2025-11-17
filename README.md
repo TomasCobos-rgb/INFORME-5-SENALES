@@ -21,7 +21,7 @@ En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se div
 
 La razon por la cual se presenta de esta manera el filtro IIR es debido a la inestabilidad numérica. Los coeficientes del denominador, obtenidos de la expansión algebraica de alto orden, tienen errores de redondeo. Este error provoca que al menos uno de los polos se ubique fuera del Círculo Unitario en el plano z, haciendo que el filtro sea inestable.
 
-![IRR CON FUNCIONES PYTHON]()
+![IRR CON FUNCIONES PYTHON](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/IRR%20CON%20PYTHON.png?raw=true)
 
 ```python
 import pandas as pd

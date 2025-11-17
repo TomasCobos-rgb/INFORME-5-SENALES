@@ -290,6 +290,22 @@ print("Realizando análisis de HRV...")
 calcular_hrv_tiempo(rr_ms1, "Segmento 1")
 calcular_hrv_tiempo(rr_ms2, "Segmento 2")
 ```
+### Resultados
+ ![HRV ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_184023148.png?raw=true)
+
+ ### Análisis
+#### Media R-R Y HR Media
+Segmento 1 vs. Segmento 2: La frecuencia cardíaca promedio (HR) es ligeramente más alta en el Segmento 2 (103 BPM vs. 100 BPM). Esto sugiere que el sistema cardíaco estuvo levemente más activado o bajo menor influencia parasimpática durante el segundo periodo.
+#### SDNN Y Balance autonómico
+Segmento 1 (SDNN Bajo): La baja dispersión de los puntos en el primer segmento (Latidos = 1 a 200) indica un ritmo cardíaco relativamente estable y bajo control.
+Segmento 2 (SDNN Alto): El valor de SDNN es drásticamente más alto. Esto se debe a los picos y valles extremos que aparecen después del latido 250.
+Interpretación Biológica (Teórica): Un SDNN alto indica generalmente una gran flexibilidad autonómica y un buen control del Sistema Nervioso Autónomo (SNA).
+Interpretación Práctica (Datos obtenidos): En tu caso, los picos son tan extremos (>1700 ms) que son casi seguro artefactos o errores de detección de picos R causados por el ruido persistente o por la suavidad del filtro IIR de segundo orden utilizado. Esto infla artificialmente el valor de SDNN, invalidando su uso como una medida biológica pura.
 
 
- ![HRV ]()
+
+
+
+
+
+

@@ -244,4 +244,52 @@ El proceso se implementó asumiendo que el filtro estaba en estado de reposo al 
 2. Segmentación: La señal filtrada se dividió en dos segmentos de 2 minutos cada uno.
 3. Detección R-R: Se identificaron los picos R en cada segmento usando un umbral de altura y distancia.
 4. Cálculo R-R: Se midió la diferencia de tiempo entre picos R consecutivos y se convirtió a milisegundos ($\text{ms}$), generando la señal final de Intervalos R-R.
-   
+
+#### Análisis del HRV
+
+```python
+import pandas as pd
+import numpy as np
+
+# --- PARAMETROS ---
+FILENAME = "RR_Interval_Signal_N2_Filtro.csv"
+
+# --- CÁLCULOS DE HRV EN EL DOMINIO DEL TIEMPO ---
+
+def calcular_hrv_tiempo(rr_ms, nombre):
+    """Calcula la media RR, SDNN y HR media para un segmento."""
+    media_rr = np.mean(rr_ms)
+    std_rr = np.std(rr_ms, ddof=1) # SDNN: Desviación Estándar de los Intervalos N-N
+    media_hr = 60000 / media_rr # Frecuencia cardíaca media en BPM
+    
+    print(f"--- {nombre} ---")
+    print(f"Latidos analizados: {len(rr_ms)}")
+    print(f"Media RR (ms): {media_rr:.2f}")
+    print(f"SDNN (ms): {std_rr:.2f}")
+    print(f"Media HR (BPM): {media_hr:.2f}")
+    return media_rr, std_rr, media_hr
+
+# --- CARGAR Y DIVIDIR DATOS ---
+try:
+    df_rr = pd.read_csv(FILENAME)
+    rr_ms_total = df_rr['RR_Interval_ms'].values
+    N_total = len(rr_ms_total)
+except Exception:
+    print(f"Error al cargar {FILENAME}. Asegúrate de ejecutar el paso anterior primero.")
+    exit()
+
+# División: Asumimos una división simple por la mitad para fines de comparación,
+# aunque la división exacta depende del número de latidos en los primeros 2 minutos.
+N_rrs1 = N_total // 2 
+
+rr_ms1 = rr_ms_total[:N_rrs1]
+rr_ms2 = rr_ms_total[N_rrs1:]
+
+# Ejecución
+print("Realizando análisis de HRV...")
+calcular_hrv_tiempo(rr_ms1, "Segmento 1")
+calcular_hrv_tiempo(rr_ms2, "Segmento 2")
+```
+
+
+ ![HRV ]()

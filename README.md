@@ -16,4 +16,4 @@ En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se div
 ### Desarrollo filtro IIR 
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/WhatsApp%20Image%202025-11-17%20at%201.04.20%20PM.jpeg?raw=true)
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/WhatsApp%20Image%202025-11-17%20at%201.04.52%20PM.jpeg?raw=true)
-![]()
+![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/WhatsApp%20Image%202025-11-17%20at%201.07.15%20PM.jpeg?raw=true)

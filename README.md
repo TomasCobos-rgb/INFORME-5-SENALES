@@ -17,7 +17,7 @@ En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se div
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/WhatsApp%20Image%202025-11-17%20at%201.04.20%20PM.jpeg?raw=true)
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/WhatsApp%20Image%202025-11-17%20at%201.04.52%20PM.jpeg?raw=true)
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/WhatsApp%20Image%202025-11-17%20at%201.07.15%20PM.jpeg?raw=true)
-![MI IIR]()
+![MI IIR](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/mi%20IRR.png?raw=true)
 
 La razon por la cual se presenta de esta manera el filtro IIR es debido a la inestabilidad numérica. Los coeficientes del denominador, obtenidos de la expansión algebraica de alto orden, tienen errores de redondeo. Este error provoca que al menos uno de los polos se ubique fuera del Círculo Unitario en el plano z, haciendo que el filtro sea inestable.
 

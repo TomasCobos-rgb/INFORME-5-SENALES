@@ -486,7 +486,7 @@ print("CSI alto → Mayor actividad simpática")
 print("Ratio SD2/SD1 alto → Mayor predominio simpático")
 ```
 ![0-2](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Diagram%200-2.png?raw=true)
-![2-4]()
+![2-4](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Diagrama%202-4.png?raw=true)
 ### Resultados
  ![HRV ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_184023148.png?raw=true)
 

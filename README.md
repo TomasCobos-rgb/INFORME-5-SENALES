@@ -17,8 +17,6 @@ Este sistema se divide en dos ramas principales:
 - **Simpática**
 - **Parasimpática**
 
----
-
 ## Sistema Nervioso Simpático
 
 El sistema simpático prepara al organismo para situaciones de **estrés o emergencia**, conocidas como *lucha o huida*.
@@ -47,11 +45,23 @@ El sistema parasimpático controla los procesos corporales durante situaciones o
 - Estimula el tubo digestivo para procesar los alimentos y eliminar los residuos.
 
 **Mecanismo:**
-- Las fibras parasimpáticas, principalmente del *nervio vago*, liberan **acetilcolina**, que actúa sobre los **receptores muscarínicos M₂** del nodo SA..
+- Las fibras parasimpáticas, principalmente del *nervio vago*, liberan **acetilcolina**, que actúa sobre los **receptores muscarínicos M₂** del nodo SA.
 - Esto reduce la pendiente de despolarización espontánea y puede aumentar la **permeabilidad al potasio (K⁺)**, hiperpolarizando la membrana.
 
 ### SISTEMA NERVIOSO AUTÓNOMO  
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Imagen1.jpg?raw=true)
+
+# HRV
+La variabilidad de la frecuencia cardíaca (HRV) se calcula a partir de la señal del electrocardiograma **(ECG)** midiendo las variaciones en el tiempo entre los latidos sucesivos, específicamente entre los **picos R**. Este análisis permite evaluar el funcionamiento del sistema nervioso autónomo y proporciona información sobre la capacidad de adaptación y recuperación del cuerpo. El proceso incluye identificar los picos R en la señal del ECG y luego calcular el intervalo entre ellos para obtener la señal de HRV. 
+
+### Interpretación y significado de la HRV
+- **HRV alta:** Generalmente se asocia con un sistema nervioso autónomo equilibrado, buena condición física y una mayor capacidad de adaptación al estrés.
+- **HRV baja:** Puede indicar estrés, fatiga acumulada o un estado de sobreentrenamiento, ya que el cuerpo tiene una menor capacidad de adaptación.
+- **Análisis de tendencias:** Es más valioso observar las tendencias de la HRV a lo largo del tiempo en lugar de un valor aislado, para así identificar patrones de recuperación y rendimiento. 
+
+![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/gr-hrv_Time1525275392438.jpg?raw=true)
+
+
 
 ### PARTE B
 En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se divide en dos segmentos de 2 minutos, y se detectan los picos R para calcular los intervalos R-R. Con esta información, se analizan parámetros básicos de la variabilidad de la frecuencia cardíaca (HRV) en el dominio del tiempo, como la media y la desviación estándar, comparando ambos segmentos para evaluar el balance autonómico.

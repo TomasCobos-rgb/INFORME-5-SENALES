@@ -507,11 +507,11 @@ Interpretación Práctica (Datos obtenidos): En tu caso, los picos son tan extre
 
 #### Datos obtenidos en el Diagrama Poincaré
 
-Según habiendo revisado los resultados anteriores podemos apreciar una notable transicion en estado autonomico cardiaco entre ambos segmentos. Esto es asi ya que en el segmento numero 1 se mostro un comportamiento de mayor activida vagal o parasimpatica, observado por su SD1 alto (200.90 ms) y un CSI bajo (0.738), por lo anterior podemos deducir que en ese periodo de tiempo predominó el "descanso". 
+Según habiendo revisado los resultados anteriores podemos apreciar una notable transición en estado autonómico cardíaco entre ambos segmentos. Esto es así ya que en el segmento numero 1 se mostro un comportamiento de mayor actividad vagal o parasimpática, observado por su SD1 alto (200.90 ms) y un CSI bajo (0.738), por lo anterior podemos deducir que en ese periodo de tiempo predominó el "descanso". 
 
-Por otro lado segun el resultado del SD2 parece tener un comportamiento simpatico significativo, con un notable aumento del CSI (1.346) y de la SD2 (208.81 ms) lo cual representa una mayor variacion total y una clara respuesta al esfuerzo o estres, que a su vez tiene sentido ya que posee coherencia con el incremento de la frecuencia cardiaca promedio (220.2 lpm) 
+Por otro lado según el resultado del SD2 parece tener un comportamiento simpático significativo, con un notable aumento del CSI (1.346) y de la SD2 (208.81 ms) lo cual representa una mayor variación total y una clara respuesta al esfuerzo o estrés, que a su vez tiene sentido ya que posee coherencia con el incremento de la frecuencia cardíaca promedio (220.2 lpm).
 
- Los datos obtenidos nos confirman los sucesos ocurridos en el laboratorio ya que se partió del reposo total y en silencio por 2 min donde se observo el tipico comportmiento parasimpatico del cuerpo en la frecuencia cardiaca manteniendo el control y evitando en lo mayor posible las variaciones bruscas, pero al llegar a los 2 min un estimulo que fue el de leer en voz alta un texto fue el detonante para que la frecuencia cardiaca aumentara debido a la respuesta simpatica del cuerpo, este comportamiento fue evidenciado por los datos obtenidos el cual era el objetivo del laboratorio.
+ Los datos obtenidos nos confirman los sucesos ocurridos en el laboratorio ya que se partió del reposo total y en silencio por 2 min donde se observo el tipico comportamiento parasimpático del cuerpo en la frecuencia cardiaca manteniendo el control y evitando en lo mayor posible las variaciones bruscas, pero al llegar a los 2 min un estimulo que fue el de leer en voz alta un texto fue el detonante para que la frecuencia cardíaca aumentara debido a la respuesta simpática del cuerpo, este comportamiento fue evidenciado por los datos obtenidos el cual era el objetivo del laboratorio.
 
 
 

@@ -355,6 +355,11 @@ print("Realizando análisis de HRV...")
 calcular_hrv_tiempo(rr_ms1, "Segmento 1")
 calcular_hrv_tiempo(rr_ms2, "Segmento 2")
 ```
+
+#### Obtencion del diagrama Poincaré
+
+
+
 ### Resultados
  ![HRV ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_184023148.png?raw=true)
 

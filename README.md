@@ -30,6 +30,7 @@ El sistema simpático prepara al organismo para situaciones de **estrés o emerg
 - Produce sudoración (especialmente en las palmas).  
 - Dilata las pupilas.  
 - Produce piloerección (erección del vello).
+
 **Mecanismo:**
 - Las fibras simpáticas liberan noradrenalina, que actúa sobre los receptores β₁-adrenérgicos del nodo sinoauricular (SA) del corazón.
 - Esto incrementa la velocidad de despolarización espontánea de las células marcapasos, haciendo que los potenciales de acción se generen más rápidamente.

@@ -73,39 +73,7 @@ En este gráfico, cada punto representa la relación entre dos intervalos R–R 
 
 
 # Plan de acción 
-```mermaid
-flowchart TD
 
-A[Inicio: Investigación Teórica] --> B[Actividad simpática y parasimpática]
-B --> C[Efecto sobre la FC]
-C --> D[HRV y ECG]
-D --> E[Diagrama de Poincaré]
-E --> F[Formulación del Plan de Acción]
-
-F --> G[Adquisición ECG 4 min]
-G --> G1[0-2 min: reposo]
-G --> G2[2-4 min: lectura]
-
-G --> H[Verificar configuración de muestreo]
-
-H --> I[Preprocesamiento]
-I --> I1[Diseño de filtro IIR]
-I --> I2[Ecuación en diferencias]
-I --> I3[Aplicar filtro]
-I --> I4[Segmentación 2 min y 2 min]
-
-I4 --> J[Detección picos R]
-J --> K[Cálculo RR]
-
-K --> L[HRV en el tiempo]
-L --> L1[Media RR]
-L --> L2[SDNN]
-L --> M[Comparación entre segmentos]
-
-M --> N[Diagrama de Poincaré por segmento]
-N --> O[Cálculo CSI y CVI]
-O --> P[Interpretación del balance autonómico]
-P --> Q[Fin]
 
 ### PARTE B
 En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se divide en dos segmentos de 2 minutos, y se detectan los picos R para calcular los intervalos R-R. Con esta información, se analizan parámetros básicos de la variabilidad de la frecuencia cardíaca (HRV) en el dominio del tiempo, como la media y la desviación estándar, comparando ambos segmentos para evaluar el balance autonómico.

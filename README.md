@@ -61,6 +61,18 @@ La variabilidad de la frecuencia cardíaca (HRV) se calcula a partir de la seña
 
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/gr-hrv_Time1525275392438.jpg?raw=true)
 
+# Diagrama de Poincaré 
+El diagrama de Poincaré es una herramienta visual que permite analizar la variabilidad de los intervalos R–R del electrocardiograma, la cual refleja la interacción entre las ramas simpática y parasimpática del sistema nervioso autónomo que regulan el ritmo cardíaco.
+En este gráfico, cada punto representa la relación entre dos intervalos R–R consecutivos. La forma y dispersión de los puntos aportan información sobre el equilibrio autonómico del corazón.
+
+### Interpretación 
+-	Una **alta variabilidad** (mayor dispersión en el diagrama de Poincaré) indica una predominancia parasimpática, asociada con un estado de reposo, buena adaptación fisiológica y equilibrio autonómico.
+-	En cambio, una **baja variabilidad** (nube estrecha y alargada) sugiere una predominancia simpática, que refleja estrés, fatiga o menor capacidad de respuesta cardíaca.
+
+![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Captura.JPG?raw=true)
+
+
+
 
 
 ### PARTE B

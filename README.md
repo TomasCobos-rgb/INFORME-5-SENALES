@@ -492,7 +492,7 @@ print("Ratio SD2/SD1 alto → Mayor predominio simpático")
 ![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Analisis%20diag%202-4.png?raw=true)
 ### Resultados
  ![HRV ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_184023148.png?raw=true)
-![]()
+![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Comparacion%20diagr.png?raw=true)
 
  ### Análisis
 #### Media R-R Y HR Media

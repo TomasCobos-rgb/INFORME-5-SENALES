@@ -485,7 +485,7 @@ print("CVI alto → Mayor modulación vagal")
 print("CSI alto → Mayor actividad simpática")
 print("Ratio SD2/SD1 alto → Mayor predominio simpático")
 ```
-[]()
+[](imagenes/Diagram 0-2.png)
 
 ### Resultados
  ![HRV ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_184023148.png?raw=true)

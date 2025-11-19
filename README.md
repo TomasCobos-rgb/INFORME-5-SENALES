@@ -8,7 +8,42 @@ Variabilidad de la Frecuencia Cardíaca (HRV) y balance autonómico
 4. Analizar HRV en el dominio del tiempo (media y desviación estándar).
 5. Construir diagramas de Poincaré y calcular índices CVI y CSI
 ### PARTE A
+# Sistema Nervioso Autónomo (SNA)
 
+El **sistema nervioso autónomo** es la parte del sistema nervioso que inerva los órganos internos, incluidos:
+
+- Vasos sanguíneos  
+- Estómago  
+- Intestino  
+- Hígado  
+- Riñones  
+- Vejiga  
+- Genitales  
+- Pulmones  
+- Pupilas  
+- Corazón  
+- Glándulas sudoríparas, salivales y digestivas  
+
+Este sistema se divide en dos ramas principales:
+
+- **Simpática**
+- **Parasimpática**
+
+---
+
+## 🧠 Sistema Nervioso Simpático
+
+El sistema simpático prepara al organismo para situaciones de **estrés o emergencia**, conocidas como *lucha o huida*.
+
+### 🔹 Funciones principales
+- Aumenta la frecuencia cardíaca.  
+- Incrementa la fuerza de contracción del corazón.  
+- Dilata las vías respiratorias.  
+- Libera energía almacenada.  
+- Aumenta la fuerza muscular.  
+- Produce sudoración (especialmente en las palmas).  
+- Dilata las pupilas.  
+- Produce piloerección (erección del vello).
 
 ### PARTE B
 En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se divide en dos segmentos de 2 minutos, y se detectan los picos R para calcular los intervalos R-R. Con esta información, se analizan parámetros básicos de la variabilidad de la frecuencia cardíaca (HRV) en el dominio del tiempo, como la media y la desviación estándar, comparando ambos segmentos para evaluar el balance autonómico.

@@ -10,19 +10,7 @@ Variabilidad de la Frecuencia Cardíaca (HRV) y balance autonómico
 ### PARTE A
 # Sistema Nervioso Autónomo (SNA)
 
-El **sistema nervioso autónomo** es la parte del sistema nervioso que inerva los órganos internos, incluidos:
-
-- Vasos sanguíneos  
-- Estómago  
-- Intestino  
-- Hígado  
-- Riñones  
-- Vejiga  
-- Genitales  
-- Pulmones  
-- Pupilas  
-- Corazón  
-- Glándulas sudoríparas, salivales y digestivas  
+El **sistema nervioso autónomo** es la parte del sistema nervioso que inerva los órganos internos, incluidoslos vasos sanguíneos, el estómago, el intestino, el hígado, los riñones, la vejiga, los genitales, los pulmones, las pupilas, el corazón y las glándulas sudoríparas, salivales y digestivas.
 
 Este sistema se divide en dos ramas principales:
 
@@ -31,11 +19,11 @@ Este sistema se divide en dos ramas principales:
 
 ---
 
-## 🧠 Sistema Nervioso Simpático
+## Sistema Nervioso Simpático
 
 El sistema simpático prepara al organismo para situaciones de **estrés o emergencia**, conocidas como *lucha o huida*.
 
-### 🔹 Funciones principales
+### Funciones principales
 - Aumenta la frecuencia cardíaca.  
 - Incrementa la fuerza de contracción del corazón.  
 - Dilata las vías respiratorias.  
@@ -44,6 +32,26 @@ El sistema simpático prepara al organismo para situaciones de **estrés o emerg
 - Produce sudoración (especialmente en las palmas).  
 - Dilata las pupilas.  
 - Produce piloerección (erección del vello).
+**Mecanismo:**
+- Las fibras simpáticas liberan noradrenalina, que actúa sobre los receptores β₁-adrenérgicos del nodo sinoauricular (SA) del corazón.
+- Esto incrementa la velocidad de despolarización espontánea de las células marcapasos, haciendo que los potenciales de acción se generen más rápidamente.
+
+## Sistema Nervioso Parasimpático
+
+El sistema parasimpático controla los procesos corporales durante situaciones ordinarias.  
+
+### Funciones principales
+- Se dedica a conservar y restaurar.  
+- Retarda la frecuencia cardíaca.  
+- Disminuye la presión arterial.
+- Estimula el tubo digestivo para procesar los alimentos y eliminar los residuos.
+
+**Mecanismo:**
+- Las fibras parasimpáticas, principalmente del *nervio vago*, liberan **acetilcolina**, que actúa sobre los **receptores muscarínicos M₂** del nodo SA..
+- Esto reduce la pendiente de despolarización espontánea y puede aumentar la **permeabilidad al potasio (K⁺)**, hiperpolarizando la membrana.
+
+### SISTEMA NERVIOSO AUTÓNOMO  
+![](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/Imagen1.jpg?raw=true)
 
 ### PARTE B
 En esta etapa se aplica un filtro digital IIR para limpiar la señal ECG, se divide en dos segmentos de 2 minutos, y se detectan los picos R para calcular los intervalos R-R. Con esta información, se analizan parámetros básicos de la variabilidad de la frecuencia cardíaca (HRV) en el dominio del tiempo, como la media y la desviación estándar, comparando ambos segmentos para evaluar el balance autonómico.

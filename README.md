@@ -357,8 +357,134 @@ calcular_hrv_tiempo(rr_ms2, "Segmento 2")
 ```
 
 #### Obtencion del diagrama Poincaré
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks
 
+# Cargar los datos
+data = pd.read_csv('/content/drive/MyDrive/senal_EcG_LAB52minsilencio.csv')
 
+# Extraer tiempo y voltaje
+tiempo = data['Tiempo (s)'].values
+voltaje = data['Voltaje (mV)'].values
+
+# Dividir en 2 segmentos de 2 minutos (120 segundos cada uno)
+duracion_total = tiempo[-1]
+segmento1_tiempo = tiempo[tiempo <= 120]
+segmento1_voltaje = voltaje[:len(segmento1_tiempo)]
+
+segmento2_tiempo = tiempo[(tiempo > 120) & (tiempo <= 240)]
+segmento2_voltaje = voltaje[len(segmento1_tiempo):len(segmento1_tiempo) + len(segmento2_tiempo)]
+
+def analizar_poincare(tiempo_seg, voltaje_seg, nombre_segmento):
+    # Detectar picos R (complejos QRS)
+    picos, _ = find_peaks(voltaje_seg, height=2.0, distance=50)
+    
+    # Calcular intervalos RR (en segundos)
+    rr_intervals = np.diff(tiempo_seg[picos])
+    
+    # Convertir a milisegundos
+    rr_ms = rr_intervals * 1000
+    
+    # Diagrama de Poincaré (RRn vs RRn+1)
+    rr_n = rr_ms[:-1]
+    rr_n1 = rr_ms[1:]
+    
+    # Calcular índices del diagrama de Poincaré
+    sd1 = np.std(rr_n1 - rr_n) / np.sqrt(2)  # Dispersión perpendicular a la línea de identidad
+    sd2 = np.std(rr_n1 + rr_n) / np.sqrt(2)  # Dispersión a lo largo de la línea de identidad
+    
+    # Índices de variabilidad cardíaca
+    cvi = np.log10(sd2 * sd1)  # Cardiac Vagal Index (actividad vagal)
+    csi = (sd2 / sd1)  # Cardiac Sympathetic Index (actividad simpática)
+    
+    # Crear figura
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+    
+    # Señal ECG
+    ax1.plot(tiempo_seg, voltaje_seg, 'b-', linewidth=0.8)
+    ax1.plot(tiempo_seg[picos], voltaje_seg[picos], 'ro', markersize=4, label='Picos R')
+    ax1.set_xlabel('Tiempo (s)')
+    ax1.set_ylabel('Voltaje (mV)')
+    ax1.set_title(f'ECG - {nombre_segmento}')
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
+    
+    # Diagrama de Poincaré
+    ax2.scatter(rr_n, rr_n1, alpha=0.6, s=20)
+    ax2.plot([min(rr_n), max(rr_n)], [min(rr_n), max(rr_n)], 'r--', alpha=0.7, label='Línea identidad')
+    
+    # Elipse de dispersión (visualización)
+    from matplotlib.patches import Ellipse
+    ellipse = Ellipse((np.mean(rr_n), np.mean(rr_n1)), 
+                     width=2*sd2, height=2*sd1,
+                     angle=45, alpha=0.2, color='red')
+    ax2.add_patch(ellipse)
+    
+    ax2.set_xlabel('RRn (ms)')
+    ax2.set_ylabel('RRn+1 (ms)')
+    ax2.set_title(f'Diagrama de Poincaré - {nombre_segmento}\nSD1: {sd1:.2f}, SD2: {sd2:.2f}')
+    ax2.legend()
+    ax2.grid(True, alpha=0.3)
+    ax2.set_aspect('equal')
+    
+    plt.tight_layout()
+    plt.show()
+    
+    # Estadísticas adicionales
+    hr_mean = 60000 / np.mean(rr_ms)  # Frecuencia cardíaca promedio
+    hr_std = np.std(60000 / rr_ms)    # Desviación estándar de FC
+    
+    print(f"\n--- ANÁLISIS {nombre_segmento} ---")
+    print(f"Número de intervalos RR: {len(rr_ms)}")
+    print(f"FC promedio: {hr_mean:.1f} lpm")
+    print(f"Variabilidad FC: {hr_std:.1f} lpm")
+    print(f"SD1 (dispersión perpendicular): {sd1:.2f} ms")
+    print(f"SD2 (dispersión longitudinal): {sd2:.2f} ms")
+    print(f"Índice Vagal (CVI): {cvi:.3f}")
+    print(f"Índice Simpático (CSI): {csi:.3f}")
+    print(f"Ratio SD2/SD1: {sd2/sd1:.3f}")
+    
+    return {
+        'sd1': sd1,
+        'sd2': sd2,
+        'cvi': cvi,
+        'csi': csi,
+        'hr_mean': hr_mean,
+        'hr_std': hr_std,
+        'rr_intervals': rr_ms
+    }
+
+# Analizar ambos segmentos
+print("ANÁLISIS COMPARATIVO DE VARIABILIDAD CARDÍACA")
+print("=" * 50)
+
+resultados_seg1 = analizar_poincare(segmento1_tiempo, segmento1_voltaje, "Segmento 1 (0-2 min)")
+resultados_seg2 = analizar_poincare(segmento2_tiempo, segmento2_voltaje, "Segmento 2 (2-4 min)")
+
+# Comparación final
+print("\n" + "=" * 60)
+print("COMPARACIÓN ENTRE SEGMENTOS")
+print("=" * 60)
+print(f"{'Parámetro':<25} {'Segmento 1':<12} {'Segmento 2':<12} {'Diferencia':<12}")
+print("-" * 60)
+print(f"{'SD1 (ms)':<25} {resultados_seg1['sd1']:<12.2f} {resultados_seg2['sd1']:<12.2f} {resultados_seg2['sd1']-resultados_seg1['sd1']:<12.2f}")
+print(f"{'SD2 (ms)':<25} {resultados_seg1['sd2']:<12.2f} {resultados_seg2['sd2']:<12.2f} {resultados_seg2['sd2']-resultados_seg1['sd2']:<12.2f}")
+print(f"{'CVI (vagal)':<25} {resultados_seg1['cvi']:<12.3f} {resultados_seg2['cvi']:<12.3f} {resultados_seg2['cvi']-resultados_seg1['cvi']:<12.3f}")
+print(f"{'CSI (simpático)':<25} {resultados_seg1['csi']:<12.3f} {resultados_seg2['csi']:<12.3f} {resultados_seg2['csi']-resultados_seg1['csi']:<12.3f}")
+print(f"{'FC promedio (lpm)':<25} {resultados_seg1['hr_mean']:<12.1f} {resultados_seg2['hr_mean']:<12.1f} {resultados_seg2['hr_mean']-resultados_seg1['hr_mean']:<12.1f}")
+
+# Interpretación
+print("\nINTERPRETACIÓN:")
+print("SD1 alto → Mayor actividad vagal (parasimpático)")
+print("SD2 alto → Mayor variabilidad total")
+print("CVI alto → Mayor modulación vagal") 
+print("CSI alto → Mayor actividad simpática")
+print("Ratio SD2/SD1 alto → Mayor predominio simpático")
+```
+[]()
 
 ### Resultados
  ![HRV ](https://github.com/TomasCobos-rgb/INFORME-5-SENALES/blob/main/imagenes/imagen_2025-11-17_184023148.png?raw=true)
